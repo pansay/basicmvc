@@ -12,16 +12,16 @@ abstract class Controller extends Base {
         $this->setRenderer(DEFAULT_RENDERER);
     }
 
-    protected function setTemplate($template) {
+    protected function setTemplate ($template) {
         $this->template = 'application/view/template/' . $template . '.phtml';
     }
 
-    protected function setRenderer($renderer) {
+    protected function setRenderer ($renderer) {
         $this->renderer = $renderer;
     }
 
-    public function __destruct () {
-        $file = 'system/engine/renderer/' . $this->renderer . '.php';
+    public function render () {
+        $file = 'system/renderer/' . $this->renderer . '.php';
         $class = 'Renderer' . $this->renderer;
         if (file_exists($file)) {
             require $file;

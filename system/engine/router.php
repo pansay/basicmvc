@@ -28,6 +28,7 @@ final class Router extends Base {
         $this->setClass($route);
         $this->controller = new $this->class($this->registry);
         $this->controller->index();
+        $this->controller->render();
     }
 
     private function setFile ($route) {
