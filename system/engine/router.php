@@ -2,10 +2,8 @@
 
 final class Router extends Base {
 
-    private $route = '';
     private $file;
     private $class;
-    private $controller;
 
     public function __construct ($registry) {
         parent::__construct($registry);
@@ -26,9 +24,9 @@ final class Router extends Base {
         }
         require $this->file;
         $this->setClass($route);
-        $this->controller = new $this->class($this->registry);
-        $this->controller->index();
-        $this->controller->render();
+        $controller = new $this->class($this->registry);
+        $controller->index();
+        $controller->render();
     }
 
     private function setFile ($route) {
