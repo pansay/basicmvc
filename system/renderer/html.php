@@ -2,22 +2,23 @@
 
 class RendererHtml {
 
-    public function render($template, $data) {
-
+    public static function output ($template, $data) {
         if (file_exists($template)) {
             extract($data);
+            ini_set('zlib.output_compression','On');
             ob_start();
-            require_once($template);
-            $this->response->setOutput(ob_get_contents());
+                include $template;
+                $output = ob_get_contents();
+                $output = preg_replace('~>\s*\n\s*<~', '><', $output);
+                $output = str_replace("\n", '', $output);
             ob_end_clean();
-            $this->response->addHeader('X-UA-Compatible: IE=Edge');
-            $this->response->addHeader('Content-Type: text/html; charset=utf-8');
-
+            header('X-UA-Compatible: IE=Edge');
+            header('Content-Type: text/html; charset=utf-8');
+            echo $output;
         }
         else {
-            die('Error: Could not load template ' . $template . '!');
+            die('Error: Could not load template '.$template.'!');
         }
-
     }
 
 }
