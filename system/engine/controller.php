@@ -13,15 +13,20 @@ abstract class Controller extends Base {
     }
 
     protected function setTemplate($template) {
-        $this->template = 'application/view/template/' . $template . '.tpl';
+        $this->template = 'application/view/template/' . $template . '.phtml';
     }
 
     protected function setRenderer($renderer) {
-        $this->renderer = 'Renderer' . $renderer;
+        $this->renderer = $renderer;
     }
 
     public function __destruct () {
-        $this->renderer::output($this->template, $this->data);
+        $file = 'system/engine/renderer/' . $this->renderer . '.php';
+        $class = 'Renderer' . $this->renderer;
+        if (file_exists($file)) {
+            require $file;
+            $class::output($this->template, $this->data);
+        }
     }
 
 }
