@@ -7,7 +7,7 @@ final class Router extends Base {
 
     public function __construct ($registry) {
         parent::__construct($registry);
-        //$this->load = new Loader($registry);
+        $this->load = new Loader($registry);
     }
 
     public function dispatch () {
