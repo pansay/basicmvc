@@ -3,9 +3,9 @@
 final class Loader extends Base {
 
     public function model ($model) {
-        $name = 'model_' . str_replace('/', '_', $model);
+        $name = 'model_' . $model;
         $file  = 'application/model/' . $model . '.php';
-        $class = 'Model' . String::cleanName($model);
+        $class = 'Model' . $model;
         if (!$this->registry->has($name)) {
             if (file_exists($file)) {
                 require $file;

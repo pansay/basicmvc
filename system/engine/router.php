@@ -12,7 +12,7 @@ final class Router extends Base {
 
     public function dispatch () {
         if (isset($_GET['route'])) {
-            $route = String::cleanRoute($_GET['route']);
+            $route = $_GET['route'];
         }
         if ($route === '') { // home
             $route = 'home';
@@ -30,11 +30,11 @@ final class Router extends Base {
     }
 
     private function setFile ($route) {
-        $this->file = 'application/controller/' . $route . '.php';
+        $this->file = 'application/controller/' . String::cleanFile($route) . '.php';
     }
 
     private function setClass ($route) {
-        $this->class = 'Controller' . $route;
+        $this->class = 'Controller' . String::cleanClass($route);
     }
 
 }
